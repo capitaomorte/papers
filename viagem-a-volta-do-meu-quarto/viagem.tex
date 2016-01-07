@@ -1,47 +1,149 @@
 \documentclass[12pt]{article}
-\usepackage{fontspec}
+
 \usepackage{titling}
 \usepackage[portuguese]{babel}
-\renewcommand{\baselinestretch}{1.5} 
 \usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{adjustbox}
 \usepackage{lipsum}
+
+
+
+%%%% Espaçamento por omissão
+%%%%
+\usepackage{setspace}
+\doublespacing
+
+
+%%%% Fonts
+%%%%
+\usepackage{fontspec}
+\setmainfont[]{Times New Roman}
+
+
+%%%% Margins
+%%%% 
+\usepackage[margin=2cm,left=3cm]{geometry}
+
+
+%%%% Bibliography
+%%%% 
 \usepackage[backend=biber,autolang=other,
   bibencoding=utf8,style=authoryear-ibid,
   ibidtracker=true]{biblatex}
-
-\setmainfont[]{Times New Roman}
-
-\usepackage[margin=2cm,left=3cm]{geometry}
-
 \addbibresource{viagem.bib}
+
+
+%%%% Sections como Queirós
+%%%%
+\usepackage{sectsty}
+
+\renewcommand\thesection{}
+\renewcommand\thesubsection{\thesection\arabic{subsection}.}
+
+%% OMG, stolen from http://tex.stackexchange.com/questions/80113/hide-section-numbers-but-keep-numbering#80114
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+\allsectionsfont{\normalsize\raggedright}
+\subsectionfont{\normalsize\leftskip\leftskip\leftskip\leftskip\leftskip\leftskip}
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.7\baselineskip}{0\baselineskip}
+\titlespacing*{\subsection}{1cm}{0\baselineskip}{0\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0\baselineskip}{0\baselineskip}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm}
+
+
+%% Sumário
+%%
+\renewcommand*\contentsname{Sumário}
+
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftsecindent}{-15pt}
+
+\renewcommand{\cfttoctitlefont}{\normalsize\bfseries}
+\setlength{\cftaftertoctitleskip}{0pt}
+
+\renewcommand{\cftsecfont}{\roman}
+\renewcommand{\cftsecpagefont}{\roman}
+
+%% \newcommand{\cftsecfont}{}
+%% \newcommand{\cftsecaftersnum}{}
+%% \newcommand{\cftsecaftersnumb}{}
+%% \newcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
+%% \newcommand{\cftsecdotsep}{\cftdotsep}
+%% \newcommand{\cftsecpagefont}{}
+%% \newcommand{\cftsecafterpnum}{}
+
+
+
+%% Título
+%% 
 
 \title{Viagem à volta do meu quarto}
 \date{10 de Dezembro de 2015}
 \author{João Távora \\Faculdade de Belas Artes da Universidade de Lisboa}
 
+
+%% Page numbers
+%%
+\usepackage{fancyhdr}
+\pagestyle{fancy} % Turn on the style
+\fancyhf{} % Start with clearing everything in the header and footer
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Redefine plain style, which is used for titlepage and chapter beginnings
+% From http://tex.stackexchange.com/a/30230/828
+\fancypagestyle{plain}{%
+    \renewcommand{\headrulewidth}{0pt}%
+    \fancyhf{}%
+    \fancyfoot[R]{\thepage}%
+}
+
+
+%% Início do documento
+%% 
 \begin{document}
-%% DONE: le tértre, o que é?
-%% TODO: Bibliografia, maketitle
-%% TODO: Muitas referências a acidentes
-%% DONE: Imagem quadro do van gogh
-%% TODO: Revolução realista (dignidade dos temas esquecidos da realidade)
-%% DONE: o Quarto como autoretrato enquanto ausência
+
+%%%% DONE: le tértre, o que é?
+%%%% TODO: Bibliografia, maketitle
+%%%% TODO: Muitas referências a acidentes
+%%%% DONE: Imagem quadro do van gogh
+%%%% TODO: Revolução realista (dignidade dos temas esquecidos da realidade)
+%%%% DONE: o Quarto como autoretrato enquanto ausência
 
 \emph{Viagem à volta do meu quarto}\\
 \emph{João Távora}\\
 \emph{Faculdade de Belas Artes da Universidade de Lisboa}\\
 \emph{10 de Dezembro de 2015}\\
 
-\section{Resumo}
+\begin{spacing}{1.0}
 
-Estuda-se ''Viagem à volta do meu quarto'', pequeno livro de 1795 de
-Xavier de Maistre, paródia da literatura de viagens popular na altura,
-procurando nele pistas sobre os processos e práticas artística da
-Pintura e do Desenho, destapando a sua influência noutras obras, desde
-a sua publicação até ao presente, propondo paralelos entre o texto e
-alguns autores da filosofia, da poesia e das artes plásticas.
+\tableofcontents
+
+\begin{small}
+  \section{Resumo}
+
+    \noindent Estuda-se ''Viagem à volta do meu quarto'', pequeno livro de 1795 de
+    Xavier de Maistre, paródia da literatura de viagens popular na altura,
+    procurando nele pistas sobre os processos e práticas artística da
+    Pintura e do Desenho, destapando a sua influência noutras obras, desde
+    a sua publicação até ao presente, propondo paralelos entre o texto e
+    alguns autores da filosofia, da poesia e das artes plásticas.
+\end{small}
+
+\end{spacing}
+
 
 \section{Introdução}
 
@@ -156,7 +258,7 @@ primeiros do género.
 
 \begin{figure}
   \label{fig:1}
-  \centering\includegraphics[height=0.6\textheight,keepaspectratio] {slaapkamer.jpg}
+  \centering\includegraphics[height=0.4\textheight,keepaspectratio] {slaapkamer.jpg}
   \caption{Quarto de Van Gogh em Arles}
 \end{figure}
 
@@ -330,7 +432,7 @@ irrepetível.
 
 \end{document}
 
-%% Local Variables:
-%% coding: utf-8
-%% tex-open-quote: "''"
-%% End:
+%%%% Local Variables:
+%%%% coding: utf-8
+%%%% tex-open-quote: "''"
+%%%% End:
